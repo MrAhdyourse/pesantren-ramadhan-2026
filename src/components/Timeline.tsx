@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface TimelineProps {
   days: Array<{
@@ -16,18 +16,27 @@ export default function Timeline({ days }: TimelineProps) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const tickingRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
-    
+
+    // Throttled scroll handler using requestAnimationFrame
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      setScrollProgress(Math.min(progress, 100));
+      if (!tickingRef.current) {
+        requestAnimationFrame(() => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          setScrollProgress(Math.min(progress, 100));
+          tickingRef.current = false;
+        });
+        tickingRef.current = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Use passive event listener for better scroll performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -35,16 +44,19 @@ export default function Timeline({ days }: TimelineProps) {
     <>
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-emerald-100/50 z-50">
-        <div 
-          className="h-full bg-gradient-to-r from-amber-400 via-emerald-500 to-teal-500 transition-all duration-150 ease-out"
-          style={{ width: `${scrollProgress}%` }}
+        <div
+          className="h-full bg-gradient-to-r from-amber-400 via-emerald-500 to-teal-500"
+          style={{
+            width: `${scrollProgress}%`,
+            willChange: 'width',
+          }}
         />
       </div>
 
       <nav className="sticky top-0 w-full bg-white/80 backdrop-blur-md shadow-lg border-b border-emerald-100 z-40">
         {/* Animated line under nav */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent" />
-        
+
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex justify-center gap-3">
             {days.map((day, index) => {
@@ -57,7 +69,7 @@ export default function Timeline({ days }: TimelineProps) {
                   key={day.dayNumber}
                   href={day.dayNumber === 1 && isHome ? '/' : `/day${day.dayNumber}`}
                   className={`
-                    group relative flex-1 max-w-[140px] px-4 py-3 rounded-2xl font-semibold 
+                    group relative flex-1 max-w-[140px] px-4 py-3 rounded-2xl font-semibold
                     transition-all duration-500 ease-out text-center overflow-hidden
                     ${mounted ? 'animate-scale-in' : 'opacity-0'}
                     ${isCurrentDay
@@ -71,7 +83,7 @@ export default function Timeline({ days }: TimelineProps) {
                   {isCurrentDay && (
                     <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                   )}
-                  
+
                   {/* Ripple container */}
                   <div className="absolute inset-0 overflow-hidden rounded-2xl">
                     <div className={`absolute inset-0 bg-white/20 scale-0 group-active:scale-100 transition-transform duration-300 rounded-full`} />

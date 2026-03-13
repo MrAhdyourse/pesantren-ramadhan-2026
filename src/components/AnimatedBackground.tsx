@@ -9,7 +9,7 @@ export default function AnimatedBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationId: number;
@@ -31,77 +31,81 @@ export default function AnimatedBackground() {
 
     const createParticles = () => {
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
-      
+      // Reduce particle count for better performance
+      const particleCount = Math.min(
+        Math.floor((canvas.width * canvas.height) / 25000),
+        80
+      );
+
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.3,
+          speedX: (Math.random() - 0.5) * 0.2,
+          speedY: (Math.random() - 0.5) * 0.2,
           opacity: Math.random() * 0.5 + 0.2,
-          twinkleSpeed: Math.random() * 0.02 + 0.01,
+          twinkleSpeed: Math.random() * 0.015 + 0.005,
           twinklePhase: Math.random() * Math.PI * 2,
         });
       }
     };
 
-    const animate = () => {
+    // Throttle frame rate for better performance
+    let lastTime = 0;
+    const targetFPS = 30;
+    const frameInterval = 1000 / targetFPS;
+
+    const animate = (currentTime: number) => {
+      animationId = requestAnimationFrame(animate);
+
+      // Throttle to target FPS
+      const deltaTime = currentTime - lastTime;
+      if (deltaTime < frameInterval) return;
+      lastTime = currentTime - (deltaTime % frameInterval);
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
         particle.twinklePhase += particle.twinkleSpeed;
 
-        // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.y < 0) particle.y = canvas.height;
         if (particle.y > canvas.height) particle.y = 0;
 
-        // Calculate twinkle opacity
         const twinkle = Math.sin(particle.twinklePhase) * 0.3 + 0.7;
         const currentOpacity = particle.opacity * twinkle;
 
-        // Draw particle with glow
-        const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.size * 3
-        );
-        gradient.addColorStop(0, `rgba(255, 215, 0, ${currentOpacity})`);
-        gradient.addColorStop(0.5, `rgba(255, 215, 0, ${currentOpacity * 0.3})`);
-        gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
-
+        // Simplified rendering - no gradient per frame (major performance gain)
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
+        ctx.arc(particle.x, particle.y, particle.size * 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 215, 0, ${currentOpacity * 0.4})`;
         ctx.fill();
 
-        // Draw core
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
         ctx.fill();
       });
-
-      animationId = requestAnimationFrame(animate);
     };
 
     resize();
     createParticles();
-    animate();
+    animationId = requestAnimationFrame(animate);
 
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       resize();
       createParticles();
-    });
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -112,11 +116,20 @@ export default function AnimatedBackground() {
         className="fixed inset-0 pointer-events-none z-0"
         style={{ opacity: 0.6 }}
       />
-      {/* Animated gradient blobs */}
+      {/* Animated gradient blobs - reduced blur for performance */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-amber-400/15 to-orange-500/15 rounded-full blur-3xl animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-40 right-1/3 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-indigo-500/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
+        <div 
+          className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-2xl animate-blob"
+          style={{ willChange: 'transform' }}
+        />
+        <div 
+          className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-amber-400/15 to-orange-500/15 rounded-full blur-2xl animate-blob animation-delay-2000"
+          style={{ willChange: 'transform' }}
+        />
+        <div 
+          className="absolute -bottom-40 right-1/3 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-indigo-500/10 rounded-full blur-2xl animate-blob animation-delay-4000"
+          style={{ willChange: 'transform' }}
+        />
       </div>
       {/* Islamic pattern overlay */}
       <div 
