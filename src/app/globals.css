@@ -346,9 +346,44 @@ body {
   transform: rotateY(5deg) rotateX(2deg);
 }
 
-/* Smooth Scroll - Optimized */
+/* Smooth Scroll - Optimized with Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar - Hidden or minimal for Lenis */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* GPU Acceleration for complex animations */
+.animate-blob, .animate-float-slow, .animate-float-medium, .animate-float-fast, 
+.animate-rotate-slow, .animate-rotate-slow-reverse, .animate-pulse-slow,
+.glass, .glass-strong {
+  will-change: transform, opacity, backdrop-filter;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 20px;
 }
 

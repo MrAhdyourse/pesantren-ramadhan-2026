@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "Timeline Pesantren Ramadhan 2026 | MI Islamic Centre Indramayu",
-  description: "Timeline kegiatan Pesantren Ramadhan 1447H - Kelas VI Al-Qowiy MI Islamic Centre Indramayu",
+  title: "Portal Ramadhan 2026 | MI Islamic Centre Indramayu",
+  description: "Portal Digital Pesantren Ramadhan 1447H - Kelas VI Al-Qowiy MI Islamic Centre Indramayu",
 };
 
 export default function RootLayout({
@@ -25,9 +15,11 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-emerald-50 to-teal-100 min-h-screen`}
+        className={`antialiased bg-[#FDFCF8] min-h-screen font-sans`}
       >
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

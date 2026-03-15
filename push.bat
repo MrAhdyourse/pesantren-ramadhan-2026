@@ -1,75 +1,44 @@
 @echo off
-chcp 65001 >nul
-title Timeline Pesantren - Push to GitHub
+setlocal
 
-echo ============================================
-echo    TIMELINE PESANTREN - Push to GitHub
-echo ============================================
-echo.
-
+:: Berpindah ke folder di mana file .bat ini berada
 cd /d "%~dp0"
 
-:: Check if git is initialized
-if not exist ".git" (
-    echo Inisialisasi Git repository...
-    git init
-    git branch -M main
-)
-
-:: Check if remote exists
-git remote | findstr "origin" >nul
-if errorlevel 1 (
-    echo Menambahkan remote origin...
-    git remote add origin https://github.com/MrAhdyourse/pesantren-ramadhan-2026.git
-)
+:: Nama repository Anda (untuk keterangan commit)
+set REPO_NAME=timeline-pesantren
 
 echo.
-echo [1/4] Membersihkan build lama...
-if exist "out" rmdir /s /q "out"
+echo [1/5] Menghapus build lama...
+if exist out rmdir /s /q out
 
 echo.
-echo [2/4] Building project untuk GitHub Pages...
-echo (Static Export - siap deploy)
-echo.
+echo [2/5] Menjalankan build (Next.js Static Export)...
 call npm run build
-
-if errorlevel 1 (
-    echo.
-    echo ERROR: Build gagal! Periksa error di atas.
+if %ERRORLEVEL% neq 0 (
+    echo [Gagal] Proses build gagal! Silakan periksa error di atas.
     pause
-    exit /b 1
+    exit /b %ERRORLEVEL%
 )
 
 echo.
-echo [3/4] Menambahkan file ke Git...
-echo (node_modules sudah di .gitignore - tidak akan di-push)
+echo [3/5] Menambahkan file .nojekyll untuk GitHub Pages...
+echo. > out\.nojekyll
+
+echo.
+echo [4/5] Menyiapkan perubahan untuk Git...
 git add .
 
 echo.
-echo [4/4] Commit dan Push ke GitHub...
-set /p commit_msg="Masukkan pesan commit (Enter untuk default): "
-if "%commit_msg%"=="" set commit_msg=Update: build untuk GitHub Pages
+echo [5/5] Melakukan Commit dan Push...
+set /p commit_msg="Masukkan pesan commit (tekan Enter untuk default: Update project): "
+if "%commit_msg%"=="" set commit_msg="Update project: %date% %time%"
 
 git commit -m "%commit_msg%"
-git branch -M main
-git push -u origin main --force
+git push origin main
 
 echo.
-echo ============================================
-echo    PUSH BERHASIL!
-echo ============================================
-echo.
-echo Repository: https://github.com/MrAhdyourse/pesantren-ramadhan-2026
-echo.
-echo Langkah selanjutnya untuk GitHub Pages:
-echo   1. Buka repo di GitHub
-echo   2. Settings ^> Pages
-echo   3. Source: Deploy from a branch
-echo   4. Branch: main, Folder: / (root)
-echo   5. Save
-echo.
-echo Atau akses langsung setelah aktif:
-echo   https://mrahdyourse.github.io/pesantren-ramadhan-2026/
-echo ============================================
-
+echo ======================================================
+echo  PROSES SELESAI!
+echo  Aplikasi Anda sedang di-deploy ke GitHub Pages.
+echo ======================================================
 pause

@@ -60,14 +60,14 @@ export default function Timeline({ days }: TimelineProps) {
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex justify-center gap-3">
             {days.map((day, index) => {
-              const isActive = pathname === `/day${day.dayNumber}`;
-              const isHome = pathname === '/';
-              const isCurrentDay = (isHome && day.dayNumber === 1) || isActive;
+              const isActive = pathname === `/timeline/day${day.dayNumber}`;
+              const isTimelineRoot = pathname === '/timeline';
+              const isCurrentDay = (isTimelineRoot && day.dayNumber === 1) || isActive;
 
               return (
                 <Link
                   key={day.dayNumber}
-                  href={day.dayNumber === 1 && isHome ? '/' : `/day${day.dayNumber}`}
+                  href={`/timeline${day.dayNumber === 1 ? '' : `/day${day.dayNumber}`}`}
                   className={`
                     group relative flex-1 max-w-[140px] px-4 py-3 rounded-2xl font-semibold
                     transition-all duration-500 ease-out text-center overflow-hidden
