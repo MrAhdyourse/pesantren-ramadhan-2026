@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { HomeButton } from "@/components";
 
 export const metadata: Metadata = {
   title: "Portal Ramadhan 2026 | MI Islamic Centre Indramayu",
@@ -18,6 +19,7 @@ export default function RootLayout({
         className={`antialiased bg-[#FDFCF8] min-h-screen font-sans`}
       >
         <SmoothScroll>
+          <HomeButton />
           {children}
         </SmoothScroll>
       </body>

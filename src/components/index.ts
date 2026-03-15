@@ -7,3 +7,4 @@ export { default as AnimatedBackground } from './AnimatedBackground';
 export { default as FloatingElements } from './FloatingElements';
 export { default as ScrollReveal } from './ScrollReveal';
 export { default as LiveClock } from './LiveClock';
+export { default as HomeButton } from './HomeButton';

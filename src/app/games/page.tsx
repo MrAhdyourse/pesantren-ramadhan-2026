@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Gamepad2, Rocket, Stars, Trophy } from 'lucide-react';
-import Link from 'next/link';
+import { Gamepad2, Rocket, Stars, Trophy } from 'lucide-react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 
 export default function GamesPage() {
@@ -11,12 +10,6 @@ export default function GamesPage() {
       <AnimatedBackground />
       
       <div className="relative z-10 max-w-6xl mx-auto px-6 pt-12 text-center">
-        <Link href="/">
-          <motion.div whileHover={{ x: -5 }} className="inline-flex items-center gap-2 text-emerald-700 font-bold mb-12">
-            <ArrowLeft className="w-5 h-5" />
-            <span>Portal Utama</span>
-          </motion.div>
-        </Link>
 
         <motion.div
           animate={{ y: [0, -10, 0] }}
