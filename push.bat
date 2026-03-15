@@ -8,8 +8,9 @@ cd /d "%~dp0"
 set REPO_NAME=timeline-pesantren
 
 echo.
-echo [1/5] Menghapus build lama...
+echo [1/5] Menghapus build dan cache lama...
 if exist out rmdir /s /q out
+if exist .next rmdir /s /q .next
 
 echo.
 echo [2/5] Menjalankan build (Next.js Static Export)...
