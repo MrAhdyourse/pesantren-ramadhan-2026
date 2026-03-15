@@ -1,26 +1,27 @@
 import type { NextConfig } from "next";
 
 const isProd = process.env.NODE_ENV === 'production';
-const repoName = 'timeline-pesantren'; 
+const repoName = 'pesantren-ramadhan-2026'; // Sesuaikan dengan nama repository Anda
 
 const nextConfig: NextConfig = {
-  // 1. Wajib untuk Static Export
+  // 1. Wajib untuk Static Export ke GitHub Pages
   output: "export",
   
-  // 2. BasePath: Agar aset ditarik dari /repo-name/ bukan dari root host
-  // Ini otomatis menangani link dan aset di production
+  // 2. BasePath: Menangani jalur aset di sub-folder GitHub
   basePath: isProd ? `/${repoName}` : "",
   
-  // 3. Trailing Slash: Memastikan /about menjadi /about/ (mencari index.html di dalam folder)
-  // Sangat direkomendasikan untuk GitHub Pages agar tidak 404 saat refresh
+  // 3. AssetPrefix: Menangani pemuatan file JS/CSS dari sub-folder
+  assetPrefix: isProd ? `/${repoName}/` : "",
+
+  // 4. Trailing Slash: Agar routing (seperti /day1) tidak 404 saat di-refresh di GitHub Pages
   trailingSlash: true,
   
-  // 4. Gambar tidak bisa di-optimize otomatis di static export tanpa server Node.js
+  // 5. Images: GitHub Pages tidak mendukung optimasi gambar server-side
   images: {
     unoptimized: true,
   },
 
-  // 5. Fitur lainnya
+  // Fitur tambahan untuk performa
   reactCompiler: true,
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],

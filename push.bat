@@ -5,7 +5,7 @@ setlocal
 cd /d "%~dp0"
 
 :: Nama repository Anda (untuk keterangan commit)
-set REPO_NAME=timeline-pesantren
+set REPO_NAME=pesantren-ramadhan-2026
 
 echo.
 echo [1/5] Menghapus build dan cache lama...
