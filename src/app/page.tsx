@@ -199,7 +199,7 @@ export default function Portal() {
             
             <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-6 leading-tight">
               Dikembangkan & Didedikasikan oleh:<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">Ahdi Aghni</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">TIM PESANTREN RAMADHAN 2026</span>
             </h2>
 
             <div className="inline-flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 mb-8">
