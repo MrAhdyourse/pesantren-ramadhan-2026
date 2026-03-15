@@ -15,7 +15,7 @@ export default function PenutupPage() {
             <li>Pembacaan Ayat Suci Al-Quran</li>
             <li>Sambutan Kepala Sekolah</li>
             <li>Pembagian Sertifikat</li>
-            <li>Pengumuman Santri Teladan</li>
+            <li>Pengumuman Peserta Terbaik</li>
             <li>Doa Penutup</li>
             <li>Photo Bersama</li>
           </ol>
@@ -23,7 +23,7 @@ export default function PenutupPage() {
         <div className="p-4 bg-yellow-50 rounded-lg">
           <h4 className="font-semibold text-yellow-800 mb-2">Penghargaan</h4>
           <ul className="list-disc list-inside space-y-1 text-gray-700 text-sm">
-            <li>Santri Teladan</li>
+            <li>Peserta Terbaik</li>
             <li>Hafalan Terbaik</li>
             <li>Tadarus Terbaik</li>
             <li>Disiplin Terbaik</li>

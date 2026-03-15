@@ -21,19 +21,19 @@ export default function DzuhurPage() {
         <ul className="space-y-2 text-sm">
           <li className="flex justify-between p-2 bg-gray-50 rounded">
             <span>Adzan Dzuhur</span>
-            <span className="text-green-600">12:00</span>
+            <span className="text-green-600">12:30</span>
           </li>
           <li className="flex justify-between p-2 bg-gray-50 rounded">
             <span>Shalat Sunnah Rawatib</span>
-            <span className="text-green-600">12:05</span>
+            <span className="text-green-600">12:35</span>
           </li>
           <li className="flex justify-between p-2 bg-gray-50 rounded">
             <span>Shalat Dzuhur Berjamaah</span>
-            <span className="text-green-600">12:15</span>
+            <span className="text-green-600">12:45</span>
           </li>
           <li className="flex justify-between p-2 bg-gray-50 rounded">
-            <span>Kultum</span>
-            <span className="text-green-600">12:30</span>
+            <span>Kultum & Istirahat</span>
+            <span className="text-green-600">13:00</span>
           </li>
         </ul>
       </div>

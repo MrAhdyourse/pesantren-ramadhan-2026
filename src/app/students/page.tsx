@@ -106,7 +106,7 @@ export default function StudentsPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-3xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 tracking-tight leading-tight"
             >
-              Profil Siswa <span className="text-emerald-600">Al-Qowiy</span>
+              Profil Peserta <span className="text-emerald-600">Al-Qowiy</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -114,14 +114,14 @@ export default function StudentsPage() {
               transition={{ delay: 0.1 }}
               className="text-gray-500 text-sm md:text-lg font-medium leading-relaxed"
             >
-              Menampilkan dedikasi dan pencapaian spiritual santri Kelas VI selama program Pesantren Ramadhan di MI Islamic Centre Indramayu.
+              Menampilkan dedikasi dan pencapaian spiritual Anak-anak Kelas VI selama program Pesantren Ramadhan di MI Islamic Centre Indramayu.
             </motion.p>
           </div>
           
           <div className="flex gap-3 md:gap-4 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
              <div className="bg-white p-3 md:p-4 rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm text-center min-w-[100px] md:min-w-[120px] flex-shrink-0">
                 <div className="text-xl md:text-2xl font-black text-emerald-600">{studentsData.length}</div>
-                <div className="text-[8px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Siswa</div>
+                <div className="text-[8px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Peserta</div>
              </div>
              <div className="bg-white p-3 md:p-4 rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm text-center min-w-[100px] md:min-w-[120px] flex-shrink-0">
                 <div className="text-xl md:text-2xl font-black text-amber-500">A+</div>

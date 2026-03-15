@@ -2,7 +2,16 @@ import { ContentPage } from '@/components';
 import { day1Data } from '@/data';
 
 export default function AsharPage() {
-  const activity = day1Data.activities.find(a => a.id === 'd1-ashar')!;
+  const activity = day1Data.activities.find(a => a.id === 'd1-ashar');
+  
+  if (!activity) {
+    return (
+      <div className="p-8 text-center">
+        <h1 className="text-2xl font-bold text-red-600">Error: Aktivitas d1-ashar Tidak Ditemukan!</h1>
+        <p className="mt-4 text-gray-600">Silakan periksa file src/data/day1.ts untuk memastikan ID aktivitas sudah benar.</p>
+      </div>
+    );
+  }
   
   return (
     <ContentPage activity={activity} day={day1Data}>
@@ -11,7 +20,7 @@ export default function AsharPage() {
         <div className="p-4 bg-teal-50 rounded-lg">
           <p className="text-gray-700">
             Tadarus bersama dengan metode tartil dan tahsin. 
-            Setiap santri membaca 1-2 halaman Al-Quran dengan tajwid yang benar.
+            Setiap Anak-anak membaca 1-2 halaman Al-Quran dengan tajwid yang benar.
           </p>
         </div>
         <h4 className="font-semibold text-gray-700 mt-4">Target Tadarus</h4>

@@ -70,7 +70,7 @@ export default function Portal() {
     },
     {
       title: 'Profil Al-Qowiy',
-      description: 'Daftar siswa & statistik pencapaian individu',
+      description: 'Daftar Peserta & statistik pencapaian individu',
       icon: <Users className="w-8 h-8" />,
       href: '/students',
       color: 'from-blue-500 to-cyan-600',

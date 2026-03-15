@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Gamepad2, Rocket, Stars, Trophy } from 'lucide-react';
+import { Gamepad2, Rocket, Stars, Trophy, ShieldCheck, Shield, Zap } from 'lucide-react';
+import Link from 'next/link';
 import AnimatedBackground from '@/components/AnimatedBackground';
 
 export default function GamesPage() {
@@ -25,42 +26,62 @@ export default function GamesPage() {
           dengan tantangan dan hadiah menarik!
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div 
-            whileHover={{ y: -10 }} 
-            className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-indigo-50/50"
-          >
-            <div className="w-20 h-20 bg-indigo-100 rounded-[1.5rem] flex items-center justify-center text-indigo-600 mb-6 group-hover:rotate-12 transition-transform">
-              <Rocket className="w-10 h-10" />
-            </div>
-            <h3 className="font-bold text-xl text-gray-900 mb-3">Quiz Ramadhan</h3>
-            <p className="text-gray-500 text-sm mb-6 leading-relaxed">Asah pengetahuan agamamu dengan kuis cepat 60 detik!</p>
-            <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full uppercase tracking-widest border border-indigo-100">Segera Hadir</span>
-          </motion.div>
-          
-          <motion.div 
-            whileHover={{ y: -10 }} 
-            className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-amber-50/50"
-          >
-            <div className="w-20 h-20 bg-amber-100 rounded-[1.5rem] flex items-center justify-center text-amber-600 mb-6 group-hover:scale-110 transition-transform">
-              <Stars className="w-10 h-10" />
-            </div>
-            <h3 className="font-bold text-xl text-gray-900 mb-3">Hafalan Surah</h3>
-            <p className="text-gray-500 text-sm mb-6 leading-relaxed">Cocokkan potongan ayat surah pendek dengan benar!</p>
-            <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-4 py-2 rounded-full uppercase tracking-widest border border-amber-100">Segera Hadir</span>
-          </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <Link href="/games/mystery-box" className="block">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-indigo-50/50 h-full"
+            >
+              <div className="w-20 h-20 bg-indigo-100 rounded-[1.5rem] flex items-center justify-center text-indigo-600 mb-6 group-hover:rotate-12 transition-transform">
+                <Gamepad2 className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-3">100 Mystery Box</h3>
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">Uji keberuntunganmu! Pilih kotak dan temukan kejutan random di dalamnya.</p>
+              <span className="text-[10px] font-bold text-white bg-indigo-600 px-4 py-2 rounded-full uppercase tracking-widest border border-indigo-100">Main Sekarang</span>
+            </motion.div>
+          </Link>
 
-          <motion.div 
-            whileHover={{ y: -10 }} 
-            className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-emerald-50/50"
-          >
-            <div className="w-20 h-20 bg-emerald-100 rounded-[1.5rem] flex items-center justify-center text-emerald-600 mb-6 group-hover:-rotate-12 transition-transform">
-              <Trophy className="w-10 h-10" />
-            </div>
-            <h3 className="font-bold text-xl text-gray-900 mb-3">Papan Skor</h3>
-            <p className="text-gray-500 text-sm mb-6 leading-relaxed">Lihat siapa yang paling unggul di kelas Al-Qowiy!</p>
-            <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-4 py-2 rounded-full uppercase tracking-widest border border-emerald-100">Sedang Proses</span>
-          </motion.div>
+          <Link href="/games/adab-mission" className="block">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-emerald-50/50 h-full"
+            >
+              <div className="w-20 h-20 bg-emerald-100 rounded-[1.5rem] flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-3">Misi Generasi Beradab</h3>
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">Latih etikamu! Hadapi berbagai skenario sosial dan jadilah Peserta teladan.</p>
+              <span className="text-[10px] font-bold text-white bg-emerald-600 px-4 py-2 rounded-full uppercase tracking-widest border border-emerald-100">Mulai Misi</span>
+            </motion.div>
+          </Link>
+
+          <Link href="/games/shield-kindness" className="block">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-sky-50/50 h-full"
+            >
+              <div className="w-20 h-20 bg-sky-100 rounded-[1.5rem] flex items-center justify-center text-sky-600 mb-6 group-hover:rotate-12 transition-transform">
+                <Shield className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-3">Perisai Kebaikan</h3>
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">Ketangkasan refleks! Tangkap sikap terpuji dan tepis kata-kata bullying.</p>
+              <span className="text-[10px] font-bold text-white bg-sky-600 px-4 py-2 rounded-full uppercase tracking-widest border border-sky-100">Uji Refleks</span>
+            </motion.div>
+          </Link>
+
+          <Link href="/games/adab-blitz" className="block">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group bg-white/80 p-10 rounded-[2.5rem] shadow-xl border-4 border-white flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:bg-amber-50/50 h-full"
+            >
+              <div className="w-20 h-20 bg-amber-100 rounded-[1.5rem] flex items-center justify-center text-amber-600 mb-6 group-hover:scale-110 transition-transform">
+                <Zap className="w-10 h-10" />
+              </div>
+              <h3 className="font-bold text-xl text-gray-900 mb-3">Adab Blitz</h3>
+              <p className="text-gray-500 text-sm mb-6 leading-relaxed">Kecepatan berpikir! Tentukan adab atau zolim sebelum bom meledak!</p>
+              <span className="text-[10px] font-bold text-white bg-amber-600 px-4 py-2 rounded-full uppercase tracking-widest border border-amber-100">Main Cepat</span>
+            </motion.div>
+          </Link>
         </div>
       </div>
     </main>

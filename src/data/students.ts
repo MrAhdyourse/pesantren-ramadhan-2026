@@ -29,7 +29,7 @@ export const studentsData: Student[] = [
     id: '4',
     name: 'Dima',
     gender: 'L',
-    nickname: 'Santri Teladan',
+    nickname: 'Peserta Terbaik',
     stats: { sholat: 97, disiplin: 97, diskusi: 95, adab: 98 },
     achievements: ['Teladan Sesama', 'Ketua Kelompok']
   },
@@ -157,7 +157,7 @@ export const studentsData: Student[] = [
     id: '20',
     name: 'Agung',
     gender: 'L',
-    nickname: 'Wibawa Santri',
+    nickname: 'Wibawa Peserta',
     stats: { sholat: 95, disiplin: 97, diskusi: 93, adab: 96 },
     achievements: ['Tegas', 'Disiplin Waktu']
   },
